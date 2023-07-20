@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+    <style>
+      .box {
+        width: 400px;
+        padding: 100px 0px;
+        background-color: #ddd;
+        cursor: pointer;
+        text-align: center;
+        margin: 50px 0px;
+      }
+
+      body{
+        background-color: #eee;
+      }
+      ul{
+        margin: 0;
+      }
+      li{
+        background-color: white;
+        display: flex;
+        margin: 50px auto;
+        justify-content: space-between;
+        border-radius: 20px;
+        width: 70%;
+        padding: 30px;
+        align-items: center;
+      }
+
+      li.fav{
+        background-color: crimson;
+      }
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="toggleShowBlock">
+        <span v-if="!show"> show </span>
+        <span v-else> hide </span>
+      </button>
+      <button @click="toggleShowBook">
+        <span v-if="!showBooks"> show books </span>
+        <span v-else> hide books </span>
+      </button>
+      <div v-if="show">
+        {{auther}} - {{book}} - {{age}}
+
+        <button v-on:click="age++">increase age</button>
+        <button v-on:click="age--">increase age</button>
+
+        <button @click="changename('ali')">change name</button>
+        <br />
+        <div v-else>
+          <p>hidden</p>
+        </div>
+
+        <div class="box" @click="handleEvnent">v-on:click</div>
+        <div class="box" @mouseleave="handleEvnent">v-on:mouseleave</div>
+        <div class="box" @dblclick="handleEvnent">v-on:dblclick</div>
+        <div class="box" @mouseover="handleEvnent">v-on:mouseover</div>
+        <div class="box" @mousemove="handleEvnent">{{x}}-{{y}}</div>
+
+        <div>
+          <div v-for="user in users" >
+            <h1>{{user.name}}</h1>
+            <h1>{{user.email}}</h1>
+          </div>
+        </div>
+      </div>
+
+
+      <div v-if="showBooks" >
+
+        <ul>
+          <li v-for="Book in favbooks"   :class="{ fav: Book.isFav }" @click="toggleBook(Book)">
+             <h1> {{Book.title}} </h1>  
+             <p> {{Book.auther}} </p>  
+             <!-- <p> {{Book.image}} </p>   -->
+             <img :src="Book.image" >
+          </li>
+        </ul>
+
+
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
